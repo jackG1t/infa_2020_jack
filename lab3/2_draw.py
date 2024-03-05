@@ -1,22 +1,32 @@
 import pygame
 from pygame.draw import *
 
+
 pygame.init()
 
 FPS = 30
 screen = pygame.display.set_mode((400, 400))
+screen.fill([0, 128 ,128])
 
-x1 = 100; y1 = 100
-x2 = 300; y2 = 200
-N = 10
-color = (255, 255, 255)
-rect(screen, color, (x1, y1, x2-x1, y2-y1), 2)
-h = (x2 - x1) // (N + 1)
-x = x1 + h
-for i in range(N):
-    line(screen, color, (x, y1), (x, y2))
-    x += h
+#draw face
+circle(screen, (225,225,0), (200,200), 100)
+circle(screen, (0,0,0), (200,200), 100, 3)
 
+#draw left eye
+circle(screen, (255, 0, 0), (160, 180), 25)
+circle(screen, (0, 0, 0), (160, 180), 25, 2)
+circle(screen, (0,0,0), (160,180), 10)
+
+#draw right eye
+circle(screen, (255, 0, 0), (240, 180), 17)
+circle(screen, (0, 0, 0), (240, 180), 17, 2)
+circle(screen, (0,0,0), (240,180), 10)
+
+#draw mouth
+rect(screen, (0,0,0), (160, 240, 80, 20))
+
+#draw
+line(screen, (0,0,0), (100,100),(180,150), 10)
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
