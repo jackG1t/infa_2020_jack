@@ -1,6 +1,7 @@
 import pygame
 from pygame.draw import *
 import random
+import math
 
 def main():
     pygame.init()
@@ -12,11 +13,8 @@ def main():
     sun_position = (530, 60) #Coordinat of sun
     
     draw_sun(screen, sun_position)
-
-    for i in range(random.randint(1,5)):
-        draw_cloud(screen, get_position_cloud(screen))
+    draw_clouds(screen, random.randint(1,5))
     
-    print(screen.get_height())
     
     pygame.display.update()
     clock = pygame.time.Clock()
@@ -33,11 +31,25 @@ def main():
 def draw_sun(screen, position):
     circle(screen, (224, 224, 0), position, screen.get_height()//10)
 
-def get_position_cloud(screen):
-    max_Y = screen.get_height()//4
-    max_X = 2 * screen.get_height()//3
 
-    return random.randint(0, max_X), random.randint(0, max_Y)
+def get_position_cloud(screen, N):
+    max_Y = screen.get_height()//4
+    max_X = round(2/3 * screen.get_height())
+    half_count_cloud = math.ceil(N//2)
+    
+    for i in range(half_count_cloud):
+        for j in range(2):
+            rand_X = random.randint(i*max_X//half_count_cloud, (i+1)*max_X//half_count_cloud)
+            rand_Y = random.randint(j*max_Y//2, (j+1)*max_Y//2)
+            yield rand_X, rand_Y 
+
+
+def draw_clouds(screen, N):
+    print(f'count clouds = {N}')
+    for x,y in get_position_cloud(screen, N):
+        print(x,y)
+        draw_cloud(screen, (x,y))
+
 
 def draw_cloud(screen, position):
     max_fluf = 10
