@@ -14,7 +14,7 @@ def main():
     
     draw_sun(screen, sun_position)
     draw_clouds(screen, random.randint(1,5))
-    
+    draw_water(screen)
     
     pygame.display.update()
     clock = pygame.time.Clock()
@@ -27,6 +27,13 @@ def main():
                 finished = True
 
     pygame.quit()
+
+
+def draw_water(screen):
+    width = screen.get_width()
+    height = screen.get_height()
+    rect(screen, (0,0,224), (0, height//2 ,width, height//2))
+
 
 def draw_sun(screen, position):
     circle(screen, (224, 224, 0), position, screen.get_height()//10)
